@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
+const md5 = require("md5")
 const db = require('./config/db')
 const Card = require('./app/models/Card')
 const Post = require('./app/models/Post')
@@ -247,7 +248,7 @@ app.post("/signin", (req, res, next) => {
     res.setHeader('Content-Type', 'text/plain');
     const test = {
         accName: data.accName, 
-        password: data.password,
+        password: md5(data.password),
         status: true,
         role: 'client',
         message: 'success'
